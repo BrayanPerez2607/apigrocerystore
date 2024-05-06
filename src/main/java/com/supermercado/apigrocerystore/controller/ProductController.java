@@ -19,8 +19,8 @@ import com.supermercado.apigrocerystore.model.Product;
 import com.supermercado.apigrocerystore.service.ProductService;
 
 @RestController
-@RequestMapping("/products")
-public class ProductController extends BaseController{
+@RequestMapping("/apigrocerystore/products")
+public class ProductController {
     
     @Autowired
     private ProductService productService;

@@ -18,8 +18,8 @@ import com.supermercado.apigrocerystore.model.Client;
 import com.supermercado.apigrocerystore.service.ClientService;
 
 @RestController
-@RequestMapping("/clients")
-public class ClientController extends BaseController{
+@RequestMapping("/apigrocerystore/clients")
+public class ClientController {
     
     @Autowired
     private ClientService clientService;

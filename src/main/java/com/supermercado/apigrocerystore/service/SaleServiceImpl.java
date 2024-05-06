@@ -13,6 +13,8 @@ import com.supermercado.apigrocerystore.repository.ClientRepository;
 import com.supermercado.apigrocerystore.repository.ProductRepository;
 import com.supermercado.apigrocerystore.repository.SaleRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class SaleServiceImpl implements SaleService{
     @Autowired
@@ -25,6 +27,7 @@ public class SaleServiceImpl implements SaleService{
     private ProductRepository productRepository;
 
     @Override
+    @Transactional
     public Sale createSale(Long clientId, List<Long> productIds, BigDecimal total) {
         // Crea una nueva instancia de Sale
         Sale sale = new Sale();
@@ -60,6 +63,7 @@ public class SaleServiceImpl implements SaleService{
     }
 
     @Override
+    @Transactional
     public Sale updateSale(Long id, Sale sale) {
         // Busca una venta en la base de datos por su identificador
         Sale existingSale = saleRepository.findById(id).orElseThrow(() -> new RuntimeException("Venta no encontrada"));
