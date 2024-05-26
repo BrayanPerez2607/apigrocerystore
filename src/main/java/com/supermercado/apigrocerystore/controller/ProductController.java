@@ -1,7 +1,6 @@
 package com.supermercado.apigrocerystore.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,27 +11,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 
 import com.supermercado.apigrocerystore.model.Product;
 import com.supermercado.apigrocerystore.service.ProductService;
 
 @RestController
 @RequestMapping("/apigrocerystore/products")
-public class ProductController {
+public class ProductController extends ApiBaseController{
     
     @Autowired
     private ProductService productService;
 
     @GetMapping
+    public List<Product> getAllClients() {
+        return productService.getAll();
+    }
+
+    /*@GetMapping("/{codigo}")
     public List<Product> buscarLibros(@RequestParam(required = false) String codigo){
         if (codigo != null && !codigo.isEmpty()) {
             return productService.getByCodigo(codigo);
         }else{
             return productService.getAll();
         }
-    }
+    }*/
 
     @GetMapping("/{id}")
     public ResponseEntity<Product> obtenerProductoPorId(@PathVariable Long id){

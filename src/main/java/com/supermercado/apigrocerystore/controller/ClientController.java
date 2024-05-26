@@ -19,7 +19,7 @@ import com.supermercado.apigrocerystore.service.ClientService;
 
 @RestController
 @RequestMapping("/apigrocerystore/clients")
-public class ClientController {
+public class ClientController extends ApiBaseController{
     
     @Autowired
     private ClientService clientService;

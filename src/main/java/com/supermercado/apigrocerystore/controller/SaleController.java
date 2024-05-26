@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.supermercado.apigrocerystore.model.Sale;
 import com.supermercado.apigrocerystore.service.SaleService;
 
 @RestController
 @RequestMapping("/apigrocerystore/sales")
-public class SaleController {
+public class SaleController extends ApiBaseController{
     
     @Autowired
     private SaleService saleService;
