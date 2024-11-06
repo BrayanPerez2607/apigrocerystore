@@ -32,4 +32,7 @@ public class Client {
 
     private Long id_card;
 
+    public Long getId() {
+        return clientId;
+    }
 }

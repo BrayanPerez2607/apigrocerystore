@@ -56,7 +56,7 @@ public class ProductController extends ApiBaseController{
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> actualizarLibro(@PathVariable Long id, @RequestBody Product nuevoProdct){
+    public ResponseEntity<Product> actualizarProducto(@PathVariable Long id, @RequestBody Product nuevoProdct){
         Product productActualizado = productService.updateProduct(id, nuevoProdct);
         if (productActualizado != null) {
             return ResponseEntity.ok(productActualizado);

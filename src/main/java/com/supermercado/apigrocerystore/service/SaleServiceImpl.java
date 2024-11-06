@@ -1,7 +1,9 @@
 package com.supermercado.apigrocerystore.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,10 +34,11 @@ public class SaleServiceImpl implements SaleService{
         // Crea una nueva instancia de Sale
         Sale sale = new Sale();
         sale.setTotal(total);
+        sale.setPurchaseDate(LocalDateTime.now());
 
         // Establece el usuario que realizó la compra
         Client client = clientRepository.findById(clientId).orElseThrow(() -> new RuntimeException("We can't find the client"));
-        sale.setClientId(client);
+        sale.setClient(client);
         // Establece los productos que se compraron
         List<Product> products = productRepository.findAllById(productIds);
         sale.setProducts(products);
@@ -66,12 +69,28 @@ public class SaleServiceImpl implements SaleService{
     @Transactional
     public Sale updateSale(Long id, Sale sale) {
         // Busca una venta en la base de datos por su identificador
-        Sale existingSale = saleRepository.findById(id).orElseThrow(() -> new RuntimeException("Venta no encontrada"));
+        Sale existingSale = saleRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Venta no encontrada"));
 
         // Actualiza los atributos de la venta
         existingSale.setTotal(sale.getTotal());
-        existingSale.setClientId(sale.getClientId());
-        existingSale.setProducts(sale.getProducts());
+
+        // Establece el cliente
+        if (sale.getClient() != null && sale.getClient().getId() != null) {
+            Client client = clientRepository.findById(sale.getClient().getId())
+                    .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+            existingSale.setClient(client);
+        }
+
+        // Establece los productos
+        if (sale.getProducts() != null) {
+            List<Product> products = productRepository.findAllById(
+                    sale.getProducts().stream()
+                            .map(Product::getId)
+                            .collect(Collectors.toList())
+            );
+            existingSale.setProducts(products);
+        }
 
         // Guarda los cambios en la base de datos
         return saleRepository.save(existingSale);

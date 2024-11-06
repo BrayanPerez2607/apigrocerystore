@@ -25,10 +25,7 @@ public class ProductServiceImpl implements ProductService{
         .orElseThrow(() -> new IllegalArgumentException("The product with ID " + id + " doesn't exist."));
     }
 
-    @Override
-    public List<Product> getByCodigo(String codigo){
-        return productRepository.findByCodigo(codigo);
-    }
+
 
     @Override
     public Product addProduct(Product product){
@@ -37,7 +34,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Product updateProduct(Long id, Product newProduct){
-        if (productRepository.existsById(null)) {
+        if (productRepository.existsById(id)) {
             newProduct.setId(id);
             return productRepository.save(newProduct);
         }else{

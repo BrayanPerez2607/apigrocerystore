@@ -1,5 +1,6 @@
 package com.supermercado.apigrocerystore.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,10 +28,10 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Client clientId;
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    private Client client;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     private List<Product> products;
 
     @Column(precision = 10, scale = 2)

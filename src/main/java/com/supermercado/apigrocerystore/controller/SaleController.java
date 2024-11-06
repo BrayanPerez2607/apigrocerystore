@@ -24,10 +24,8 @@ public class SaleController extends ApiBaseController{
     private SaleService saleService;
 
     @PostMapping
-    public Sale createSale(@RequestParam("clientId") Long clientId,
-                           @RequestParam("productIds") List<Long> productIds,
-                           @RequestParam("total") BigDecimal total) {
-        return saleService.createSale(clientId, productIds, total);
+    public Sale createSale(@RequestBody CreateSaleRequest request) {
+        return saleService.createSale(request.getClientId(), request.getProductIds(), request.getTotal());
     }
 
     @GetMapping("/{id}")

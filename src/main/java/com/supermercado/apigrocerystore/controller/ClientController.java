@@ -56,7 +56,7 @@ public class ClientController extends ApiBaseController{
     }
 
     @DeleteMapping("/{clientId}")
-    public ResponseEntity<Void> deleteClientById(@PathVariable Long clientId){
+    public ResponseEntity<Void> deleteClientById(@PathVariable Long clientId) {
         clientService.deleteClient(clientId);
         return ResponseEntity.noContent().build();
     }
